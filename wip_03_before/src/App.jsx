@@ -14,12 +14,23 @@ export default function App() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //Promise
+  // useEffect(() => {
+  //   getProducts("shoes")
+  //       .then(data => setProducts(data))
+  //       .catch(error => setError(error))
+  //       .finally(() => setLoading(false));
+  // }, [])
+
+
   useEffect(() => {
-    getProducts("shoes")
-        .then(data => setProducts(data))
-        .catch(error => setError(error))
-        .finally(() => setLoading(false));
-  }, [])
+    (async () => {
+      getProducts("shoes")
+          .then(data => setProducts(data))
+          .catch(error => setError(error))
+          .finally(() => setLoading(false));
+    })(); //<--- executing async function
+  }, []);
 
   //derived state will be recalculated
   const filteredProducts = size

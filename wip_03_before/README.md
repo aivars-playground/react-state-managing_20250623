@@ -59,4 +59,30 @@ Error boundaries
 ================
 * copy example
 https://legacy.reactjs.org/docs/error-boundaries.html
-does not catch async
+does not catch async - add error state
+
+
+Promises
+========
+```jsx
+  useEffect(() => {
+    getProducts("shoes")
+    .then(data => setProducts(data))
+    .catch(error => setError(error))
+    .finally(() => setLoading(false));
+}, [])
+```
+
+Async
+=====
+```jsx
+  useEffect(() => {
+    (async () => {
+        getProducts("shoes")
+            .then(data => setProducts(data))
+            .catch(error => setError(error))
+            .finally(() => setLoading(false));
+    })(); //<--- executing async function
+}, []);
+```
+
