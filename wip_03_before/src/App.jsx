@@ -3,6 +3,7 @@ import "./App.css";
 import Footer from "./Footer";
 import Header from "./Header";
 import {getProducts} from "./services/productService";
+import Spinner from "./Spinner";
 
 export default function App() {
 
@@ -11,11 +12,13 @@ export default function App() {
   const [products, setProducts] = useState([]);
 
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getProducts("shoes")
         .then(data => setProducts(data))
-        .catch(error => setError(error));
+        .catch(error => setError(error))
+        .finally(() => setLoading(false));
   }, [])
 
   //derived state will be recalculated
@@ -36,6 +39,8 @@ export default function App() {
   }
 
   if (error) {throw error;}
+
+  if (loading) return <Spinner/>
 
   return (
     <>
