@@ -43,11 +43,16 @@ let products = [
   }
 ]
 
+
 export default function App() {
 
   //array destructuring
   const [size, setSize] = useState("")
-  
+
+  const filteredProducts = size
+      ? products.filter((product) => product.skus.find((sku) => sku.size === parseInt(size)))
+      : products;
+
   function renderProduct(p) {
     return (
       <div key={p.id} className="product">
@@ -67,7 +72,7 @@ export default function App() {
         <main>
           <section id="filters">
             <label htmlFor="size">Filter by Size:</label>{" "}
-            <select id="size" >
+            <select id="size" value={size} onChange={(e) => setSize(e.target.value)} >
               <option value="">All sizes</option>
               <option value="7">7</option>
               <option value="8">8</option>
@@ -75,7 +80,7 @@ export default function App() {
             </select>
           </section>
           <section id="products">
-            {products.map(renderProduct)}
+            {filteredProducts.map(renderProduct)}
           </section>
         </main>
       </div>
