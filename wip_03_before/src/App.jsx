@@ -49,6 +49,7 @@ export default function App() {
   //array destructuring
   const [size, setSize] = useState("")
 
+  //derived state will be recalculated
   const filteredProducts = size
       ? products.filter((product) => product.skus.find((sku) => sku.size === parseInt(size)))
       : products;
@@ -79,6 +80,7 @@ export default function App() {
               <option value="9">9</option>
             </select>
           </section>
+          {size && <h2>found {filteredProducts.length} items</h2>}
           <section id="products">
             {filteredProducts.map(renderProduct)}
           </section>
