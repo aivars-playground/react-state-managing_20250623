@@ -86,3 +86,23 @@ Async
 }, []);
 ```
 
+
+Async await
+===========
+```jsx
+  useEffect(() => {
+    async function init() {
+        try {
+            const response = await getProducts("shoes")
+            setProducts(response)
+        } catch (error) {
+            setError(error)
+        } finally {
+            setLoading(false)
+        }
+    }
+    init()
+}, []);
+
+```
+

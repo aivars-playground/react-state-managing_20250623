@@ -22,14 +22,28 @@ export default function App() {
   //       .finally(() => setLoading(false));
   // }, [])
 
+  //
+  // useEffect(() => {
+  //   (async () => {
+  //     getProducts("shoes")
+  //         .then(data => setProducts(data))
+  //         .catch(error => setError(error))
+  //         .finally(() => setLoading(false));
+  //   })(); //<--- executing async function
+  // }, []);
 
   useEffect(() => {
-    (async () => {
-      getProducts("shoes")
-          .then(data => setProducts(data))
-          .catch(error => setError(error))
-          .finally(() => setLoading(false));
-    })(); //<--- executing async function
+    async function init() {
+      try {
+        const response = await getProducts("shoes")
+        setProducts(response)
+      } catch (error) {
+        setError(error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    init()
   }, []);
 
   //derived state will be recalculated
