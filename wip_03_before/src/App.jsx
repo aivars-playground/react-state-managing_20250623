@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./App.css";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -44,6 +44,10 @@ let products = [
 ]
 
 export default function App() {
+
+  //array destructuring
+  const [size, setSize] = useState("")
+  
   function renderProduct(p) {
     return (
       <div key={p.id} className="product">
@@ -63,7 +67,7 @@ export default function App() {
         <main>
           <section id="filters">
             <label htmlFor="size">Filter by Size:</label>{" "}
-            <select id="size">
+            <select id="size" >
               <option value="">All sizes</option>
               <option value="7">7</option>
               <option value="8">8</option>

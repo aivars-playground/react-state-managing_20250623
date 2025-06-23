@@ -27,3 +27,15 @@ I made the following enhancements:
 1. Deleted from src: index.css, logo.svg, serviceWorker.js, App.test.js
 1. Deleted from public: logo files, manifest.json, robots.txt
 1. Customized App.js and renamed to App.jsx
+
+
+HOOKS
+-----
+declared top level, not conditional, not nested, root of component... React tracks order
+
+
+Array destructuring
+```
+const [size, setSize] = useState("")
+```
+
