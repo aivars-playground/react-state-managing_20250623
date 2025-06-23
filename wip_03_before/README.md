@@ -39,3 +39,17 @@ Array destructuring
 const [size, setSize] = useState("")
 ```
 
+
+useefect runs on each render
+```
+useEffect(() => {
+getProducts("shoes").then(data => setProducts(data));
+})
+```
+
+useEffect - run once (deps empty)
+```
+useEffect(() => {
+getProducts("shoes").then(data => setProducts(data));
+}, [])
+```
