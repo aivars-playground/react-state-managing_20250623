@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import Footer from "./Footer";
-import Header from "./Header";
 import Spinner from "./Spinner";
 import useFetch from "./services/useFetch";
+import {useParams} from "react-router-dom";
+import PageNotFound from "./PageNotFound.";
 
 export default function Products() {
 
     const [size, setSize] = useState("");
 
+    const {category} = useParams()
+
     const { data: products, loading, error } = useFetch(
-        "products?category=shoes"
+        "products?category=" + category
     );
 
     function renderProduct(p) {
@@ -30,6 +32,7 @@ export default function Products() {
 
     if (error) throw error;
     if (loading) return <Spinner />;
+    if (products.length === 0) return <PageNotFound />;
 
     return (
         <>
