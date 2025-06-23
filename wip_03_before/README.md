@@ -53,3 +53,10 @@ useEffect(() => {
 getProducts("shoes").then(data => setProducts(data));
 }, [])
 ```
+
+
+Error boundaries
+================
+* copy example
+https://legacy.reactjs.org/docs/error-boundaries.html
+does not catch async

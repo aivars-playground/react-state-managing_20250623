@@ -10,8 +10,12 @@ export default function App() {
   const [size, setSize] = useState("")
   const [products, setProducts] = useState([]);
 
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    getProducts("shoes").then(data => setProducts(data));
+    getProducts("shoes")
+        .then(data => setProducts(data))
+        .catch(error => setError(error));
   }, [])
 
   //derived state will be recalculated
@@ -30,6 +34,8 @@ export default function App() {
       </div>
     );
   }
+
+  if (error) {throw error;}
 
   return (
     <>
