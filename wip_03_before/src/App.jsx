@@ -1,93 +1,60 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Footer from "./Footer";
 import Header from "./Header";
-import {getProducts} from "./services/productService";
 import Spinner from "./Spinner";
+import useFetch from "./services/useFetch";
 
 export default function App() {
 
-  //array destructuring
-  const [size, setSize] = useState("")
-  const [products, setProducts] = useState([]);
+  const [size, setSize] = useState("");
 
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  //Promise
-  // useEffect(() => {
-  //   getProducts("shoes")
-  //       .then(data => setProducts(data))
-  //       .catch(error => setError(error))
-  //       .finally(() => setLoading(false));
-  // }, [])
-
-  //
-  // useEffect(() => {
-  //   (async () => {
-  //     getProducts("shoes")
-  //         .then(data => setProducts(data))
-  //         .catch(error => setError(error))
-  //         .finally(() => setLoading(false));
-  //   })(); //<--- executing async function
-  // }, []);
-
-  useEffect(() => {
-    async function init() {
-      try {
-        const response = await getProducts("shoes")
-        setProducts(response)
-      } catch (error) {
-        setError(error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    init()
-  }, []);
-
-  //derived state will be recalculated
-  const filteredProducts = size
-      ? products.filter((product) => product.skus.find((sku) => sku.size === parseInt(size)))
-      : products;
+  const { data: products, loading, error } = useFetch(
+      "products?category=shoes"
+  );
 
   function renderProduct(p) {
     return (
-      <div key={p.id} className="product">
-        <a href="/">
-          <img src={`/images/${p.image}`} alt={p.name} />
-          <h3>{p.name}</h3>
-          <p>${p.price}</p>
-        </a>
-      </div>
+        <div key={p.id} className="product">
+          <a href="/">
+            <img src={`/images/${p.image}`} alt={p.name} />
+            <h3>{p.name}</h3>
+            <p>${p.price}</p>
+          </a>
+        </div>
     );
   }
 
-  if (error) {throw error;}
+  const filteredProducts = size
+      ? products.filter((p) => p.skus.find((s) => s.size === parseInt(size)))
+      : products;
 
-  if (loading) return <Spinner/>
+  if (error) throw error;
+  if (loading) return <Spinner />;
 
   return (
-    <>
-      <div className="content">
-        <Header />
-        <main>
-          <section id="filters">
-            <label htmlFor="size">Filter by Size:</label>{" "}
-            <select id="size" value={size} onChange={(e) => setSize(e.target.value)} >
-              <option value="">All sizes</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-            </select>
-          </section>
-          {size && <h2>found {filteredProducts.length} items</h2>}
-          <section id="products">
-            {filteredProducts.map(renderProduct)}
-          </section>
-        </main>
-      </div>
-      <Footer />
-    </>
+      <>
+        <div className="content">
+          <Header />
+          <main>
+            <section id="filters">
+              <label htmlFor="size">Filter by Size:</label>{" "}
+              <select
+                  id="size"
+                  value={size}
+                  onChange={(e) => setSize(e.target.value)}
+              >
+                <option value="">All sizes</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+              </select>
+              {size && <h2>Found {filteredProducts.length} items</h2>}
+            </section>
+            <section id="products">{filteredProducts.map(renderProduct)}</section>
+          </main>
+        </div>
+        <Footer />
+      </>
   );
 }

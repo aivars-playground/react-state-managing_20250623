@@ -106,3 +106,13 @@ Async await
 
 ```
 
+
+
+Custom hook
+===========
+```jsx
+const { data: products, loading, error } = useFetch(
+    "products?category=shoes"
+);
+```
+```data: products  ``` deconstruct and extract data field. alias as product
