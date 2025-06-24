@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {saveShippingAddress} from "./services/shippingService";
+import {getShippingAddress, saveShippingAddress} from "./services/shippingService";
 
 // Declaring outside component to avoid recreation on each render
 const emptyAddress = {
@@ -19,6 +19,10 @@ export default function Checkout({ cart, emptyCart }) {
   const [status, setStatus] = useState(STATUS.IDLE);
   const [saveError, setSaveError] = useState(null);
 
+  //derived state... we do not need STATUS.error
+  const errors = getErrors(address);
+  const isValid = Object.keys(errors).length === 0;
+
   function handleChange(e) {
     e.persist(); //react persist the event.... pre react 17????
     setAddress((prevState) => {
@@ -36,14 +40,25 @@ export default function Checkout({ cart, emptyCart }) {
   async function handleSubmit(event) {
     event.preventDefault();  //????????prevent second post????
     setStatus(STATUS.SUBMITTING)
-    try {
-      await saveShippingAddress(address);
-      emptyCart()
-      setStatus(STATUS.COMPLETED)
-    } catch (error) {
-      setSaveError(error);
+    if (isValid) {
+      try {
+        await saveShippingAddress(address);
+        emptyCart()
+        setStatus(STATUS.COMPLETED)
+      } catch (error) {
+        setSaveError(error);
+      }
     }
   }
+
+  function getErrors(address) {
+    const result = {}
+
+    if (!address.city) result.city="City is required"
+    if (!address.country) result.country="City is required"
+    return result;
+  }
+
 
   if (saveError) throw saveError
 
@@ -56,6 +71,18 @@ export default function Checkout({ cart, emptyCart }) {
   return (
     <>
       <h1>Shipping Info</h1>
+
+      {!isValid && status === STATUS.SUBMITTING && (
+        <div role="alert">
+          <p>fix errors:</p>
+          <ul>
+            {Object.keys(errors).map((key) => (
+              <li key={key}>{errors[key]}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="city">City</label>
