@@ -13,24 +13,26 @@ export default function App() {
   const [cart, setCart] = useState([])
 
   function addToCart(id, sku) {
-    setCart(prevState => {
-      const itemInCart = prevState.find(item => item.sku === sku);
+    setCart(items => {
+      const itemInCart = items.find(item => item.sku === sku);
       if(itemInCart){
         //add copy of item in cart with increased quantity
-        return prevState.map(
+        return items.map(
           (item) =>
             item.sku === sku ? {...item, quantity: item.quantity +1} : item
         )
       } else {
         //return new array with new itewm
-        return [...prevState, {id, sku, quantity: 1}];  //can ommit id:id, sku:sku
+        return [...items, {id, sku, quantity: 1}];  //can ommit id:id, sku:sku
       }
     });
   }
 
   function updateQuantity(sku, quantity) {
-    setCart(prevState => {
-      return prevState.map((item) => item.sku === sku ? {...item, quantity} : item)
+    setCart(items => {
+      return (quantity === 0)
+        ? items.filter(item => item.sku !== sku)
+        : items.map((item) => item.sku === sku ? {...item, quantity} : item)
     })
   }
     
