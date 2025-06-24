@@ -185,4 +185,9 @@ REFS
 ====
 * does not trigger re-render  
 * store prev  value
-* reffer to an element, e.t.c
+* refer to an element, e.t.c
+
+  compare  cpontrolled and uncontrolled elements (with refs)
+  [Detail.jsx](src/Detail.jsx)
+  and
+  [DetailRefs.jsx](src/DetailRefs.jsx)
