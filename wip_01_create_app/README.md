@@ -214,3 +214,19 @@ useFetch.js:16 Warning: Can't perform a React state update on an unmounted compo
     init();
     return () => isMountedRef.current = false
 ```
+
+
+store previous value
+====================
+```jsx
+    //urls are recreated each time!!!!!!!!!!!!!!!!
+    const urls = cart.map((i) => `products/${i.id}`);
+
+    //useFetchAll(urls); is called on each redraw, fetch gets a data and redrtaw is required!!!!!!
+    const { data: products, loading, error } = useFetchAll(urls);
+    
+    
+```
+
+
+
