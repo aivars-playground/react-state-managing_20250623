@@ -181,3 +181,8 @@ FORMS - COMPONENT
 https://formik.org/
 
 
+REFS
+====
+* does not trigger re-render  
+* store prev  value
+* reffer to an element, e.t.c
