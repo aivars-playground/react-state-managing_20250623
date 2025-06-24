@@ -191,3 +191,26 @@ REFS
   [Detail.jsx](src/Detail.jsx)
   and
   [DetailRefs.jsx](src/DetailRefs.jsx)
+
+unmounted components
+====================
+click between pages quickly (read from api), then move away
+```
+useFetch.js:16 Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+    in Products (at App.jsx:63)
+```
+
+```jsx
+    //declare
+    const isMountedRef = useRef(true);
+
+    //check if the component is mounted before  doing any changes
+    function init ...
+      if (isMountedRef.current) setData(json);
+      if (isMountedRef.current) setError(e);
+      if (isMountedRef.current) setLoading(false);
+    end init
+
+    init();
+    return () => isMountedRef.current = false
+```
