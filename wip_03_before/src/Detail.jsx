@@ -5,7 +5,7 @@ import Spinner from "./Spinner";
 import PageNotFound from "./PageNotFound.";
 import {useNavigate} from "react-router-dom";
 
-export default function Detail() {
+export default function Detail(props) {
 
     const {id} = useParams();
     const navigate = useNavigate();
@@ -38,7 +38,10 @@ export default function Detail() {
             <button
                 className="btn btn-primary"
                 disabled={!sku}
-                onClick={()=> navigate("/cart")}
+                onClick={()=> {
+                    props.addToCart(id, sku);
+                    navigate("/cart")
+                }}
             >
                 add to cart
             </button>

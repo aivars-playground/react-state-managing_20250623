@@ -116,3 +116,24 @@ const { data: products, loading, error } = useFetch(
 );
 ```
 ```data: products  ``` deconstruct and extract data field. alias as product
+
+
+States
+======
+use state as local as possible, if necessary, move to a common parent component, or context. or REDUX
+
+Imutability
+===========
+!!!avoid stopring nested objects in state!!!!!!!!!!!  
+!!!avoid costly deep clone - i.e. lodash merge, and it would force redraw !!!!!  
+!!! arrays - some methods make clone, some mutate!!!!!
+```js
+const user = {name: "myname", address:{line1:"address"}}
+
+const shallowCopy = {...user}                            //...user - spread syntax    
+const fullCopy = {...user, address: {...user.address}}
+
+const fullCopyWithExtraField = {...user, address: {...user.address}, extra: "extraValue"}
+
+const shallowVersion = Object.assign( {}, user) 
+```
