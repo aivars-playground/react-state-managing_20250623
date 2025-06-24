@@ -48,6 +48,8 @@ export default function Checkout({ cart, emptyCart }) {
       } catch (error) {
         setSaveError(error);
       }
+    } else {
+      setStatus(STATUS.SUBMITTED);
     }
   }
 
@@ -72,7 +74,7 @@ export default function Checkout({ cart, emptyCart }) {
     <>
       <h1>Shipping Info</h1>
 
-      {!isValid && status === STATUS.SUBMITTING && (
+      {!isValid && status === STATUS.SUBMITTED && (
         <div role="alert">
           <p>fix errors:</p>
           <ul>
