@@ -159,3 +159,20 @@ function handleChange(e) {
   })
 }
 ```
+
+status enum
+===========
+```jsx
+const STATUS = {
+  IDLE: "IDLE",
+  SUBMITTED: "SUBMITTED",
+  SUBMITTING: "SUBMITTING",
+  COMPLETED: "COMPLETED",
+}
+```
+
+finite state machine
+====================
+https://xstate.js.org/
+
+
