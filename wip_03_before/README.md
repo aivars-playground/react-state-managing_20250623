@@ -137,3 +137,10 @@ const fullCopyWithExtraField = {...user, address: {...user.address}, extra: "ext
 
 const shallowVersion = Object.assign( {}, user) 
 ```
+
+memo
+====
+recallculate only when cart changes
+```jsx
+    const numItemsInCart = useMemo(() => cart.reduce((total, item) => total + item.quantity, 0), [cart])
+```
