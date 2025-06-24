@@ -144,3 +144,18 @@ recallculate only when cart changes
 ```jsx
     const numItemsInCart = useMemo(() => cart.reduce((total, item) => total + item.quantity, 0), [cart])
 ```
+
+forms
+=====
+handle all changes in one go...  event .target.id reffers to a field id in state object... field in form must have an id!!!
+```jsx
+function handleChange(e) {
+  e.persist();                             //<--------------prevent too early garbage collection
+  setAddress((prevState) => {
+    return {
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }
+  })
+}
+```

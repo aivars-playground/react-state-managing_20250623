@@ -10,7 +10,13 @@ export default function Checkout({ cart }) {
   const [address, setAddress] = useState(emptyAddress);
 
   function handleChange(e) {
-    // TODO
+    e.persist(); //react persist the event.... pre react 17????
+    setAddress((prevState) => {
+      return {
+        ...prevState,
+        [e.target.id]: e.target.value,
+      }
+    })
   }
 
   function handleBlur(event) {
