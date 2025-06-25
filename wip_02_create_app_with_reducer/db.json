@@ -60,10 +60,5 @@
     }
   ],
   "shippingAddress": [
-    {
-      "city": "abc",
-      "country": "United Kingdom",
-      "id": 1
-    }
   ]
 }

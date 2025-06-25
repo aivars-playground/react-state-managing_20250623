@@ -4,8 +4,12 @@ import useFetch from "./services/useFetch";
 import Spinner from "./Spinner";
 import PageNotFound from "./PageNotFound.";
 import {useNavigate} from "react-router-dom";
+import {useMyCustomCartContextHook} from "./cartContext";
 
-export default function Detail(props) {
+export default function Detail() {
+
+    const {dispatch} = useMyCustomCartContextHook();
+
 
     const {id} = useParams();
     const navigate = useNavigate();
@@ -39,7 +43,7 @@ export default function Detail(props) {
                 className="btn btn-primary"
                 disabled={!sku}
                 onClick={()=> {
-                    props.dispatch({type:"addItem",id, sku});
+                    dispatch({type:"addItem",id, sku});
                     navigate("/cart")
                 }}
             >
