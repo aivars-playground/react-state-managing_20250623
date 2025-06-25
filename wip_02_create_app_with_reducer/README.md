@@ -228,5 +228,20 @@ store previous value
     
 ```
 
+```jsx
+  //in useFetchAll
+  const previousUrls = useRef([]);
+
+  useEffect(() => {
+
+    if (areEqual(previousUrls.current, urls)) {
+      setLoading(false)
+      return;
+    }
+    previousUrls.current = urls;
+    //make the call
+  }
+```
+
 
 

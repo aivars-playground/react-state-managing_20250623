@@ -61,49 +61,9 @@
   ],
   "shippingAddress": [
     {
-      "id": 1,
-      "city": "",
-      "country": ""
-    },
-    {
-      "city": "",
-      "country": "",
-      "id": 2
-    },
-    {
-      "city": "6rhuy5h",
-      "country": "",
-      "id": 3
-    },
-    {
-      "city": "",
-      "country": "",
-      "id": 4
-    },
-    {
-      "city": "",
-      "country": "",
-      "id": 5
-    },
-    {
-      "city": "swaefwe",
-      "country": "",
-      "id": 6
-    },
-    {
-      "city": "",
-      "country": "",
-      "id": 7
-    },
-    {
-      "city": "",
-      "country": "",
-      "id": 8
-    },
-    {
-      "city": "df",
+      "city": "abc",
       "country": "United Kingdom",
-      "id": 9
+      "id": 1
     }
   ]
 }
