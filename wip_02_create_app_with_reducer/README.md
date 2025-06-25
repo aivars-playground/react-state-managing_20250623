@@ -243,5 +243,39 @@ store previous value
   }
 ```
 
+tools
+=====
+* state: XState / redux
+https://xstate.js.org/
+  https://app.pluralsight.com/library/courses/react-redux-react-router-es6/table-of-contents
+
+* react-query  
+provides an option to return old cached value, reading data in background, and then updating UI with new data  
+[Products.react-query.jsx](../11/demos/before/src/Products.react-query.jsx)  
+
+* immer
+instead of mutating, create a new copy
+[cartReducer.immer.js](../11/demos/before/src/cartReducer.immer.js)
+```jsx
+      return produce(cart, (draft) => {
+  if (itemInCart) {
+    const itemIndex = draft.findIndex((i) => i.sku === sku);
+    draft[itemIndex].quantity++;
+  } else {
+    draft.push({ id, sku, quantity: 1 });
+  }
+});
+```
+
+* forms
+[Checkout.formik.jsx](../11/demos/before/src/Checkout.formik.jsx)
+```jsx
+    <Formik
+        initialValues={emptyAddress}
+        // validate={getErrors}           // Uncomment this to use our existing validation logic instead
+        validationSchema={checkoutSchema} // Using YUP for validation
+        onSubmit={handleSubmit}
+>
+```
 
 
